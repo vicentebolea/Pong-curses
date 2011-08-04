@@ -1,1 +1,34 @@
-ITs a test to try how github works
+EasyPong
+
+Easypong is a PingPong game wrotte in C with NCURSES lib. I did it when i was in my first year of my major. So maybe is too simple. The reason because i did this repository is to try github. But if you want to help me to make a better code, i'll be glad.
+
+!!How to compile!!
+
+You maybe have to install ncurses library. So to install tip:
+
+	$ sudo apt-get install libncurses5-dev 
+
+Go to its directory and tip:
+
+	$ cc pong.c -lncurses -o pong 
+
+Then:
+
+	$ ./pong 
+
+!!How it works!!
+
+Firstly i used a struct like a class, so the struct called "objeto" have 3 members:
+Struct objeto:
+	Member x-coordenada called 'x'
+	Member y-coordenada called 'y'
+	Member counter of puntuation called 'c'
+And is also four var of objetos:
+
+objeto's var
+	First stick called 'b1
+	Second stick called 'b2'
+	The ball called 'b'
+	The screen called 's'
+
+For any question please send me a email "vicente.bolea@gmail.com"
