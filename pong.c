@@ -6,7 +6,7 @@ bool cbool(bool);
 bool cbool(bool a) {return a=(a==true) ? false : true;} 
 
 void main() {
-	struct objeto b1,b2,b,s; char nombre[10]; char nombre2[10];
+	struct objeto b1,b2,b,s;
 	int control; int cont=0;
 	bool fin = false; bool movhor=true; bool movver=true;
 	
@@ -27,14 +27,11 @@ void main() {
         mvprintw(8,5,"         o888o        88ooo88  o888o o888o 888     888 ");
         mvprintw(9,5,"                                            888ooo888  ");
         mvprintw(11,5,"Hecho por Tito ,cualquier sugerencia vicente.bolea@gmail.com");
-        mvprintw(13,s.y/3,"Introduzca el nombre del jugador 1 y pulse ENTER");
-    	scanw("%s",nombre);
-	mvprintw(15,s.y/3,"Introduzca el nombre del jugador 2 y pulse ENTER");
-	scanw("%s",nombre2);
+      	getch();
 	erase();
 	
-	mvprintw(s.y/2,s.x/3,"%s tus controles son 'a' y 'q'",nombre);
-	mvprintw(1+s.y/2,s.x/3,"%s tus controles son las flechas del teclado",nombre2);
+	mvprintw(s.y/2,s.x/3,"Jugador1 tus controles son 'a' y 'q'");
+	mvprintw(1+s.y/2,s.x/3,"Jugador2 tus controles son las flechas del teclado");
 	mvprintw(2+s.y/2,s.x/3,"Pulse ENTER para empezar");
 	getch();
 			
@@ -110,8 +107,8 @@ void main() {
 		attroff(COLOR_PAIR(1));
 		box(stdscr,0,0);
 		
-		mvprintw(2,s.x/6,"%s : %i",nombre,b1.c);
-		mvprintw(2,4*s.x/5,"%i : %s",b2.c,nombre2);
+		mvprintw(2,s.x/6,"Jugador1 : %i",b1.c);
+		mvprintw(2,4*s.x/5,"%i : Jugador2",b2.c);
 		mvprintw(2,s.x/2-4,"tiempo: %i",cont/8);
 		attron(COLOR_PAIR(2));
 		mvprintw(s.y-4,s.x/2-4,"PINGPONG");
