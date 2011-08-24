@@ -1,7 +1,7 @@
 #include <ncurses.h>		
 #include <stdlib.h>
 #include <stdbool.h>
-struct objeto{ int x; int y; int c;};
+struct objeto{ short int x; short int y; short int c;};
 bool cbool(bool);
 bool cbool(bool a) {return a=(a==true) ? false : true;} 
 
@@ -43,7 +43,7 @@ void main() {
 
 	while (fin != true) {
 		cont++;
-		system("sleep 0.001");
+		usleep(4000);
 		if (cont%16==0) {
 		if ((b.y==s.y-1)||(b.y==1))
 			movver=cbool(movver);
