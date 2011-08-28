@@ -18,7 +18,7 @@ Then:
 
 !!How it works!!
 
-Firstly i used a struct like a class, so the struct called "objeto" have 3 members:
+Firstly i used a struct like a class, so the struct called "objeto" has 3 members:
 Struct objeto:
 	Member x-coordenada called 'x'
 	Member y-coordenada called 'y'
