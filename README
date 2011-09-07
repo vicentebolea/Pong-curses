@@ -1,6 +1,6 @@
 EasyPong
 
-Easypong is a PingPong game written in C with NCURSES lib. I did it when i was in my first year of my major. So maybe is too simple. The reason because i did this repository is to try github. But if you want to help me to make a better code, i'll be glad.
+The original EasyPong was the first version that i did. I did in my fisrt semester of my major. Is too simple and at the same time there is noob code. But i think that maybe can help. It were helped me if i had when i didnt know how to use NCURSES.
 
 !!How to compile!!
 
@@ -15,20 +15,5 @@ Go to its directory and tip:
 Then:
 
 	$ ./pong 
-
-!!How it works!!
-
-Firstly i used a struct like a class, so the struct called "objeto" have 3 members:
-Struct objeto:
-	Member x-coordenada called 'x'
-	Member y-coordenada called 'y'
-	Member counter of puntuation called 'c'
-And is also four var of objetos:
-
-objeto's var
-	First stick called 'b1
-	Second stick called 'b2'
-	The ball called 'b'
-	The screen called 's'
 
 For any question please send me a email "vicente.bolea@gmail.com"
