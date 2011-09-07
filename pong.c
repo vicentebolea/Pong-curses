@@ -33,7 +33,8 @@ void initgame(objeto *b1,objeto *b2, objeto *scr){
 void engine(objeto *a,objeto *b1,objeto *b2,objeto *scr) {
 
 	a->movver=((a->y==scr->y-1)||(a->y==1)) ? cbool(a->movver);
-	if ((b->x>=src->x-2)||(b->x<=2)){
+	if ((b->x >= src->x-2)||(b->x <= 2)){
+	
 		a->movhor=cbool(a->movhor);
 		a->movver=((a->y==b1->y-1)||(a->y==b2->y-1)) ? false : cbool(a->movver);
 		a->movver=((a->y==b1->y+1)||(a->y==b2->y+1)) ? true : a->movver;
