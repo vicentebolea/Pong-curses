@@ -1,24 +1,34 @@
 #include <ncurses.h>		
 #include <stdlib.h>
 #include <stdbool.h>
-struct objeto{ short int x; short int y; short int c;};
-bool cbool(bool);
-bool cbool(bool a) {return a=(a==true) ? false : true;} 
-
+typedef struct{short int x; short int y; short int c; bool movhor; bool movver;}objeto;
+bool cbool(bool a) {return a=(a==true) ? false : true;}
+void engine(objeto *a, objeto *b1, objeto *b2, objeto *scr) {
+	a->movver=((a->y==scr->y-1)||(a->y==1)) ? cbool(a->movver):a->movver;
+	if ((a->x >= scr->x-2)||(a->x <= 2)){
+		a->movhor=cbool(a->movhor);
+		a->movver=((a->y==b1->y-1)||(a->y==b2->y-1)) ? false : cbool(a->movver);
+		a->movver=((a->y==b1->y+1)||(a->y==b2->y+1)) ? true : a->movver;
+		if (((a->y > b1->y+1)||(a->y < b1->y-1))&&(a->x>=scr->x-2)) {b1->c++; a->x=scr->x/2; a->y=scr->y/2;}
+		if (((a->y > b2->y+1)||(a->y < b2->y-1))&&(a->x<=2)) {b2->c++; a->x=scr->x/2; a->y=scr->y/2;}
+	}
+	a->x=(a->movhor==true) ? a->x+1 : a->x-1;
+	a->y=(a->movver==true) ? a->y+1 : a->y-1;
+}
 void main() {
-	struct objeto b1,b2,b,s;
-	int control; int cont=0;
-	bool fin = false; bool movhor=true; bool movver=true;
+	objeto b1,b2,b,s; int cont=0; bool fin=false;
 	
-	initscr();					//inicia la pantalla
+	initscr();					
 	start_color();	
-	keypad(stdscr, true);				//Teclas especiales
-	noecho();					//Que no devuelva lo que introduzcas por la pantalla
-	curs_set(0);					
-	nodelay(stdscr,0); 
+	keypad(stdscr, true);
+	noecho();
+	curs_set(0);	
+	init_pair(1,COLOR_RED,COLOR_BLACK);
+	init_pair(2,COLOR_BLUE,COLOR_BLACK);
+	init_pair(3,COLOR_WHITE,COLOR_BLACK);					
 	getmaxyx(stdscr,s.y,s.x);
-	b1.x=s.x-2; b2.x=1;
-	b1.y=s.y/2; b2.y=s.y/2;
+	b1.x=s.x-2; 	b2.x=1;		b.x=s.x/2;
+	b1.y=s.y/2; 	b2.y=s.y/2; 	b.y=s.y/2;
 	b1.c=0;		b2.c=0;
 	mvprintw(4,5,"          oooooooooo                                   "); 
         mvprintw(5,5,"          888    888  ooooooo  oo oooooo     oooooooo8 ");
@@ -26,50 +36,23 @@ void main() {
         mvprintw(7,5,"          888       888     888 888   888   888oo888o  ");
         mvprintw(8,5,"         o888o        88ooo88  o888o o888o 888     888 ");
         mvprintw(9,5,"                                            888ooo888  ");
-        mvprintw(11,5,"Hecho por Tito ,cualquier sugerencia vicente.bolea@gmail.com");
-      	getch();
-	erase();
-	
-	mvprintw(s.y/2,s.x/3,"Jugador1 tus controles son 'a' y 'q'");
-	mvprintw(1+s.y/2,s.x/3,"Jugador2 tus controles son las flechas del teclado");
-	mvprintw(2+s.y/2,s.x/3,"Pulse ENTER para empezar");
+        mvprintw(11,5,"Any questions please send me at vicente.bolea@gmail.com");
+	mvprintw(14,s.x/4,"Player 1 your controls are 'a' and 'q'");
+	mvprintw(15,s.x/4,"Player 2 your controls are the arrows of the keyboard");
+	mvprintw(17,s.x/4,"Push ANY key to start");
 	getch();
 			
-	nodelay(stdscr,1);		
-	init_pair(1,COLOR_RED,COLOR_BLACK);
-	init_pair(2,COLOR_BLUE,COLOR_BLACK);
-	init_pair(3,COLOR_WHITE,COLOR_BLACK);
-	goto inicio;
-
+	nodelay(stdscr,1);
 	while (fin != true) {
 		cont++;
 		usleep(4000);
-		if (cont%16==0) {
-		if ((b.y==s.y-1)||(b.y==1))
-			movver=cbool(movver);
-		if (((b.x==s.x-2)||(b.x==2))&&((b.y==b1.y)||(b.y==b1.y+1)||(b.y==b1.y-1)||(b.y==b2.y)||(b.y==b2.y-1)||(b.y==b2.y+1))){
-			movhor=cbool(movhor);
-			if ((b.y==b1.y-1)||(b.y==b2.y-1)) movver=false;
-			if ((b.y==b1.y+1)||(b.y==b2.y+1)) movver=true;
-		}
-		if ((b.x==s.x)||(b.x<=1)) { inicio: 
-			b1.c=(b.x<=1)?b1.c+1: b1.c; 
-			b2.c=(b.x>=s.x)?b2.c+1: b2.c;
-			b.y=s.y/2; b.x=s.x/2; 
-			movver=cbool(movver); movhor=cbool(movhor);
-		}
-		b.x=(movhor==true) ? b.x+1 : b.x-1;
-		b.y=(movver==true) ? b.y+1 : b.y-1;
-
+		if (cont%16==0) { engine(&b,&b1,&b2,&s);
 		if (b1.y<=1) b1.y=s.y-2;
 		if (b1.y>=s.y-1) b1.y=2;
 		if (b2.y<=1) b2.y=s.y-2; 
 		if (b2.y>=s.y-1) b2.y=2;
 		}
-		fflush(stdin);			//limpia el buffer de la entrada estandar(teclado)
-		control=getch();		// Control
-		switch (control) {
-			
+		switch (getch()) {
 			case KEY_DOWN:
 				b1.y++;
 				break;
@@ -83,8 +66,8 @@ void main() {
 				b2.y++;
 				break;
 			case 112:
-				nodelay(stdscr,0);		//Pausa
-				mvprintw(s.y/2,s.x/4,"El Juego esta en pausa, pulse ENTER para renaudar");
+				nodelay(stdscr,0);
+				mvprintw(s.y/2,s.x/4,"The game is paused, push ANY key to resume");
 				getch();
 				nodelay(stdscr,1);
 				break;
@@ -92,7 +75,14 @@ void main() {
 				fin=true;
 				break;
 		}
-		erase();		
+		erase();
+		box(stdscr,0,0);
+		attron(COLOR_PAIR(1));
+		mvprintw(b.y,b.x,"o");
+		attroff(COLOR_PAIR(1));	
+		attron(COLOR_PAIR(2));
+		mvprintw(s.y-4,s.x/2-4,"PINGPONG");
+		attroff(COLOR_PAIR(2));		
 		attron(COLOR_PAIR(3));
 		mvprintw(b1.y-1,b1.x,"|");
 		mvprintw(b1.y,b1.x,"|");
@@ -101,25 +91,10 @@ void main() {
 		mvprintw(b2.y,b2.x,"|");
 		mvprintw(b2.y+1,b2.x,"|");
 		attroff(COLOR_PAIR(3));
-
-		attron(COLOR_PAIR(1));
-		mvprintw(b.y,b.x,"o");
-		attroff(COLOR_PAIR(1));
-		box(stdscr,0,0);
-		
-		mvprintw(2,s.x/6,"Jugador1 : %i",b1.c);
-		mvprintw(2,4*s.x/5,"%i : Jugador2",b2.c);
-		mvprintw(2,s.x/2-4,"tiempo: %i",cont/8);
-		attron(COLOR_PAIR(2));
-		mvprintw(s.y-4,s.x/2-4,"PINGPONG");
-		attroff(COLOR_PAIR(2));
-		refresh();
-		fflush(stdin);
+		mvprintw(2,s.x/11,"Player 1 : %i",b1.c);
+		mvprintw(2,4*s.x/5,"%i : Player 2",b2.c);
+		mvprintw(2,s.x/2-4,"time: %i",cont/8);
 	}
 	erase();
-	mvprintw(4,20,"Byee!!!");
-	refresh();
-        getch();
-	system("sleep 1");
         endwin();
 }
