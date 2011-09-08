@@ -1,8 +1,9 @@
 #include <ncurses.h>
+
 typedef struct{short int x; short int y; short int c; bool movhor; bool movver;}objeto;
 bool cbool(bool a) {return a=(a==true) ? false : true;}
 void engine(objeto *a, objeto *b1, objeto *b2, objeto *scr) {
-	a->movver=((a->y==scr->y-1)||(a->y==1)) ? cbool(a->movver):a->movver;
+	if((a->y==scr->y-1)||(a->y==1)) a->movver=cbool(a->movver);
 	if ((a->x>=scr->x-2)||(a->x<=2)){
 		a->movhor=cbool(a->movhor);
 		a->movver=((a->y==b1->y-1)||(a->y==b2->y-1)) ? false : cbool(a->movver);
