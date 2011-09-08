@@ -18,17 +18,19 @@ Then:
 
 !!How it works!!
 
-Firstly i used a struct like a class, so the struct called "objeto" have 3 members:
+Firstly i used a struct like a class, so the struct called "objeto" have 5 members:
 Struct objeto:
 	Member x-coordenada called 'x'
 	Member y-coordenada called 'y'
 	Member counter of puntuation called 'c'
+	Member move vertical called 'movver'
+	Member move horizontal called 'movhor'
 And is also four var of objetos:
 
 objeto's var
 	First stick called 'b1
 	Second stick called 'b2'
 	The ball called 'b'
-	The screen called 's'
+	The screen called 'scr'
 
 For any question please send me a email "vicente.bolea@gmail.com"
