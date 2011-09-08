@@ -18,15 +18,15 @@ void engine(objeto *a, objeto *b1, objeto *b2, objeto *scr) {
 	if (b2->y>=scr->y-1) b2->y=2;
 }
 main() {
-	objeto b1,b2,b,scr; int cont=0; bool fin=false;
+	objeto b1,b2,b,scr; int i,cont=0; bool fin=false;
 	
 	initscr();					
-	start_color();	
-	keypad(stdscr, true);
-	noecho();
-	curs_set(0);	
+	start_color();
 	init_pair(1,COLOR_RED,COLOR_BLACK);
-	init_pair(2,COLOR_BLUE,COLOR_BLACK);					
+	init_pair(2,COLOR_BLUE,COLOR_BLACK);	
+	keypad(stdscr,true);
+	noecho();
+	curs_set(0);						
 	getmaxyx(stdscr,scr.y,scr.x);
 	b1.x=scr.x-2; 	b2.x=1;		b.x=scr.x/2;
 	b1.y=scr.y/2; 	b2.y=scr.y/2; 	b.y=scr.y/2;
@@ -48,42 +48,29 @@ main() {
 		usleep(4000);
 		if (++cont%16==0) engine(&b,&b1,&b2,&scr);
 		switch (getch()) {
-			case KEY_DOWN:
-				b1.y++;
-				break;
-			case KEY_UP:
-				b1.y--;
-				break;
-			case 'q':
-				b2.y--;
-				break;
-			case 'a':
-				b2.y++;
-				break;
+			case KEY_DOWN:	b1.y++; break;
+			case KEY_UP: 	b1.y--; break;
+			case 'q':	b2.y--; break;
+			case 'a':	b2.y++; break;
 			case 'p':
 				nodelay(stdscr,0);
 				mvprintw(scr.y/2,scr.x/4,"The game is paused, push ANY key to resume");
 				getch();
 				nodelay(stdscr,1);
 				break;
-			case 27:
-				fin=true;
-				break;
+			case 27: fin++; break;
 		}
-		erase();
+		erase(); i=-1;
 		box(stdscr,0,0);
 		attron(COLOR_PAIR(1));
-		mvprintw(b.y,b.x,"o");
+			mvprintw(b.y,b.x,"o");
 		attroff(COLOR_PAIR(1));
 		attron(COLOR_PAIR(2));
-		mvprintw(2,scr.x/2-4,"PINGPONG");
-		attroff(COLOR_PAIR(2));		
-		mvprintw(b1.y-1,b1.x,"|");
-		mvprintw(b1.y,b1.x,"|");
-		mvprintw(b1.y+1,b1.x,"|");
-		mvprintw(b2.y-1,b2.x,"|");
-		mvprintw(b2.y,b2.x,"|");
-		mvprintw(b2.y+1,b2.x,"|");
+			mvprintw(2,scr.x/2-4,"PINGPONG");
+			while(i++<2){
+				mvprintw(b1.y+i,b1.x,"|");
+				mvprintw(b2.y+i,b2.x,"|");}
+		attroff(COLOR_PAIR(2));
 		mvprintw(2,scr.x/11,"Player 1 : %i",b1.c);
 		mvprintw(2,4*scr.x/5,"%i : Player 2",b2.c);
 	}
