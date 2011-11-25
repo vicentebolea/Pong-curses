@@ -1,7 +1,7 @@
 #include <ncurses.h>
 
 typedef struct{short int x; short int y; short int c; bool movhor; bool movver;}objeto;
-bool cbool(bool a) {return a=(a==true) ? false : true;}
+bool cbool(bool a) {return a ? false : true;}
 void engine(objeto *a, objeto *b1, objeto *b2, objeto *scr) {
 	if((a->y==scr->y-1)||(a->y==1)) a->movver=cbool(a->movver);
 	if ((a->x>=scr->x-2)||(a->x<=2)){
@@ -11,8 +11,8 @@ void engine(objeto *a, objeto *b1, objeto *b2, objeto *scr) {
 		if (((a->y > b1->y+1)||(a->y < b1->y-1))&&(a->x>=scr->x-2)) {b1->c++; a->x=scr->x/2; a->y=scr->y/2;}
 		if (((a->y > b2->y+1)||(a->y < b2->y-1))&&(a->x<=2)) {b2->c++; a->x=scr->x/2; a->y=scr->y/2;}
 	}
-	a->x=(a->movhor==true) ? a->x+1 : a->x-1;
-	a->y=(a->movver==true) ? a->y+1 : a->y-1;
+	a->x=a->movhor ? a->x+1 : a->x-1;
+	a->y=a->movver ? a->y+1 : a->y-1;
 	if (b1->y<=1) b1->y=scr->y-2;
 	if (b1->y>=scr->y-1) b1->y=2;
 	if (b2->y<=1) b2->y=scr->y-2; 
@@ -45,7 +45,7 @@ main() {
 	getch();
 			
 	nodelay(stdscr,1);
-	while (fin != true) {
+	while (!fin) {
 		usleep(4000);
 		if (++cont%16==0) engine(&b,&b1,&b2,&scr);
 		switch (getch()) {
