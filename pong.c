@@ -1,8 +1,8 @@
 #include <ncurses.h>
 
-typedef struct{short int x;  short int y; short int c; bool movhor; bool movver;}objeto;
-bool cbool(bool a) {return a=(a==true) ? false : true;}
-main(){	register objeto b1,b2,b,scr; register int i,cont=0; bool fin=false;	
+typedef struct{short int x;  short int y; short int c; bool movhor; bool movver;}object;
+bool cbool(bool a) {return a ? false : true;}
+main(){	register object scr; register int i,cont=0; bool fin=false;	
 	initscr();					
 	start_color();
 	init_pair(1,COLOR_BLUE,COLOR_BLACK);	
@@ -10,9 +10,7 @@ main(){	register objeto b1,b2,b,scr; register int i,cont=0; bool fin=false;
 	noecho();
 	curs_set(0);						
 	getmaxyx(stdscr,scr.y,scr.x);
-	b1.x=scr.x-2; 	b2.x=1;		b.x=scr.x/2;
-	b1.y=scr.y/2; 	b2.y=scr.y/2; 	b.y=scr.y/2;
-	b1.c=0;		b2.c=0;
+	object b1={scr.x-2,scr.y/2,0,false,false},b2={1,scr.y/2,0,false,false},b={scr.x/2,scr.y/2,0,false,false};
 	mvprintw(4,5,"          oooooooooo                                  "); 
         mvprintw(5,5,"          888    888  ooooooo    ooooooo    oooooooo8");
         mvprintw(6,5,"          888oooo88 888     888 888   888  888    88o ");
@@ -25,7 +23,7 @@ main(){	register objeto b1,b2,b,scr; register int i,cont=0; bool fin=false;
 	mvprintw(17,scr.x/4,"Push ANY key to start, 'p' for pause and ESC to quit");
 	getch();		
 	nodelay(stdscr,1);
-	while (fin != true) {
+	while (!fin) {
 		usleep(4000);
 		if (++cont%16==0){if((b.y==scr.y-1)||(b.y==1)) b.movver=cbool(b.movver);
 			if ((b.x>=scr.x-2)||(b.x<=2)){
@@ -34,8 +32,8 @@ main(){	register objeto b1,b2,b,scr; register int i,cont=0; bool fin=false;
 				if((b.y==b1.y+1)||(b.y==b2.y+1)) b.movver=true;
 				if (((b.y > b1.y+1)||(b.y < b1.y-1))&&(b.x>=scr.x-2)) {b1.c++; b.x=scr.x/2; b.y=scr.y/2;}
 				if (((b.y > b2.y+1)||(b.y < b2.y-1))&&(b.x<=2)) {b2.c++; b.x=scr.x/2; b.y=scr.y/2;}}
-		b.x=(b.movhor==true) ? b.x+1 : b.x-1;
-		b.y=(b.movver==true) ? b.y+1 : b.y-1;
+		b.x=b.movhor ? b.x+1 : b.x-1;
+		b.y=b.movver ? b.y+1 : b.y-1;
 		if (b1.y<=1) b1.y=scr.y-2;
 		if (b1.y>=scr.y-1) b1.y=2;
 		if (b2.y<=1) b2.y=scr.y-2; 
