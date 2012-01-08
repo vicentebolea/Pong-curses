@@ -1,8 +1,7 @@
 #include <ncurses.h>
 typedef struct{short int x,y,c; bool movhor,movver;}object;
 
-main(){	object scr; int i,cont=0; bool fin=false;	
-	minimalist
+main(){	object scr; int i,cont=0; bool fin=false;
 	initscr();					
 	start_color();
 	init_pair(1,COLOR_BLUE,COLOR_BLACK);	
