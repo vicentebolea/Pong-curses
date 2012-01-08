@@ -21,7 +21,7 @@
     a { color: #000000; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
     .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
+    pre { font-size: 1.2em; background: #000; color: #ffffff; padding: 15px; font-style: bold;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
 	</style>
@@ -31,7 +31,7 @@
 <div id="container">
 <div class="download"> <a href="http://github.com/vicentebolea/EasyPong/zipball/master"> <img src="http://github.com/images/modules/download/zip.png" border="0" width="90"></a> <a href="http://github.com/vicentebolea/EasyPong/tarball/master"> <img src="http://github.com/images/modules/download/tar.png" border="0" width="90"></a> </div>
 <h1><a href="http://github.com/vicentebolea/EasyPong">EasyPong</a> <span class="small">by <a href="http://github.com/vicentebolea">vicentebolea</a></span></h1>
-<div class="description"> EasyPong is game written in less than 60 lines
+<div class="description"> EasyPong is game written in less than 80 lines
 with NCURSES library <g:plusone></g:plusone></div>
 <p>Only for Debian's distros, to install in anothers OS
 please download NCURSES lib separatly</p>
@@ -44,7 +44,9 @@ please download NCURSES lib separatly</p>
 		<p> Go to directory of zip file, then type: </p>
 		<pre> $ unzip vicente*; cd vicente* </pre>
 		<p> To install just type: </p>
-		<pre> $ sudo apt-get install libncurses5-dev; cc pong.c -lncurses -o pong; ./pong </pre>&nbsp;
+		<pre> $ sudo apt-get install libncurses5-dev; cc pong.c -lncurses -o pong;</pre>
+		<p> And finally to play, type:</p>
+		<pre>./pong</pre>&nbsp;
 		<br>
 	<h2>How to contribute</h2>
 	<p>EasyPong is using a git software to manage it, so if you want to colaborate with us you must know how to use git.</p>
