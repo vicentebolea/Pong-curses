@@ -1,6 +1,8 @@
 EasyPong
 
-Easypong is a PingPong game written in C with NCURSES lib. I did it when i was in my first year of my major. So maybe is too simple. The reason because i did this repository is to try github. But if you want to help me to make a better code, i'll be glad.
+Easypong is a PingPong game written in C with NCURSES lib. I did it when i was in my first year of my major. So maybe is
+too simple. The reason because i did this repository is to try github. But if you want to help me to make a better code,
+i'll be glad.
 
 !!How to compile!!
 
