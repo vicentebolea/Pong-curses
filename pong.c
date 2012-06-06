@@ -1,7 +1,34 @@
 #include <ncurses.h>
+#include <pthread.h>
+
 typedef struct{short int x,y,c; bool movhor,movver;}object;
 
-main(){	object scr; int i,cont=0; bool fin=false;
+void *thread_function(void *arg)
+{
+	if (arg == 1)
+	{
+		switch (getch()) {
+			case KEY_DOWN:	b1.y++; break;
+			case KEY_UP: 	b1.y--; break;
+			case 'q':	b2.y--; break;
+			case 27: endwin(); fin++; break;
+		}
+
+		
+	}
+	else if ( arg == 2)
+	{	
+		switch (getch()) {
+			case 'q':	b2.y--; break;
+			case 'a':	b2.y++; break;
+			case 'p':	getchar(); break;
+			case 27: endwin(); fin++; break;
+		}
+	}	
+}
+
+int main(){	
+	object scr; int i,cont=0; bool fin=false;
 	initscr();					
 	start_color();
 	init_pair(1,COLOR_BLUE,COLOR_BLACK);	
@@ -9,14 +36,14 @@ main(){	object scr; int i,cont=0; bool fin=false;
 	noecho();
 	curs_set(0);						
 	getmaxyx(stdscr,scr.y,scr.x);
-	object b1={scr.x-2,scr.y/2,0,false,false},b2={1,scr.y/2,0,false,false},b={scr.x/2,scr.y/2,0,false,false};
+	static object b1={scr.x-2,scr.y/2,0,false,false},b2={1,scr.y/2,0,false,false},b={scr.x/2,scr.y/2,0,false,false};
 	mvprintw(4,5,"          oooooooooo                                  "); 
-        mvprintw(5,5,"          888    888  ooooooo    ooooooo    oooooooo8");
-        mvprintw(6,5,"          888oooo88 888     888 888   888  888    88o ");
-        mvprintw(7,5,"          888       888     888 888   888   888oo888o ");
-        mvprintw(8,5,"         o888o        88ooo88  o888o o888o 888     888");
-        mvprintw(9,5,"                                            888ooo888");
-        mvprintw(11,5,"Any questions please send me at vicente.bolea@gmail.com");
+	mvprintw(5,5,"          888    888  ooooooo    ooooooo    oooooooo8");
+	mvprintw(6,5,"          888oooo88 888     888 888   888  888    88o ");
+	mvprintw(7,5,"          888       888     888 888   888   888oo888o ");
+	mvprintw(8,5,"         o888o        88ooo88  o888o o888o 888     888");
+	mvprintw(9,5,"                                            888ooo888");
+	mvprintw(11,5,"Any questions please send me at vicente.bolea@gmail.com");
 	mvprintw(14,scr.x/4,"Player 1 your controls are 'a' and 'q'");
 	mvprintw(15,scr.x/4,"Player 2 your controls are the arrows of the keyboard");
 	mvprintw(17,scr.x/4,"Push ANY key to start, 'p' for pause and ESC to quit");
@@ -54,15 +81,7 @@ main(){	object scr; int i,cont=0; bool fin=false;
 			if (b2.y>=scr.y-1) 
 				b2.y=2;
 		}
-		switch (getch()) {
-			case KEY_DOWN:	b1.y++; break;
-			case KEY_UP: 	b1.y--; break;
-			case 'q':	b2.y--; break;
-			case 'a':	b2.y++; break;
-			case 'p':	getchar(); break;
-			case 27: endwin(); fin++; break;
-		}
-		erase();
+			erase();
 		mvprintw(2,scr.x/2-2,"%i | %i",b1.c,b2.c);
 		mvvline(0,scr.x/2,ACS_VLINE,scr.y);
 		attron(COLOR_PAIR(1));
