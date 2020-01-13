@@ -2,7 +2,7 @@
 
 Pong-curses is a 71 lines pong game written in C with NCURSES lib. I created it on my first semester during my CS undergraduate. It's super simple and small but it works!
 
-![PongCurses](http://vicentebolea.me/Pong-curses/pong.png)
+![PongCurses](https://raw.githubusercontent.com/vicentebolea/Pong-curses/gh-pages/pong.png)
 
 ## COMPILE ME (UBUNTU/DEBIAN)
 
