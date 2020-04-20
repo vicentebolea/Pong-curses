@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Install libs
-        uses: sudo apt-get install libncurses5-dev
+        run: sudo apt-get install libncurses5-dev
          
       - name: Git clone
         uses: actions/checkout@v1
