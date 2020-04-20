@@ -1,4 +1,4 @@
-# Pong-curses [![BuildWorkflow](https://github.com/vicentebolea/Pong-curses/workflows/BuildWorkflow/badge.svg)](https://github.com/vicentebolea/Pong-curses/actions?query=workflow%3ABuildWorkflow)
+# Pong-curses [![build](https://github.com/vicentebolea/Pong-curses/workflows/build/badge.svg)](https://github.com/vicentebolea/Pong-curses/actions?query=workflow%3Abuild)
 
 Pong-curses is a 71 lines pong game written in C with NCURSES lib. I created it on my first semester during my CS undergraduate. It's super simple and small but it works!
 
