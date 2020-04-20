@@ -1,4 +1,4 @@
-name: CI
+name: BuildWorkflow
 
 on: [push]
 
@@ -17,4 +17,4 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Compile
-        run: cc pong.c -lncurses -o pong 
+        run: cc -Wall pong.c -lncurses -o pong 
