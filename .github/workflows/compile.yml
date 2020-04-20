@@ -1,4 +1,4 @@
-name: BuildWorkflow
+name: build
 
 on: [push]
 
